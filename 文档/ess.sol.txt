@@ -1,0 +1,86 @@
+pragma solidity ^0.4.0;
+
+contract ess2{
+    struct sender{
+        string filepb;//sender's file public key
+        string filepv;//sender's file private key
+        string hyperbolapb;//sender's bilinear public key
+        string hyperbolapv;//sender's bilinear private key
+    }
+    struct keyword{
+        string A;
+        string B;
+    }
+    struct receiver{
+        string hyperbolapb;
+        string filepb;
+    }
+    uint filenum;//files amount
+    mapping(string=>receiver) receivers;
+    //1th string:receivers' username; 2nd string: receivers' hyperbola public key
+    mapping(string=>sender) senders;
+    //1th string: senders' hash(username+password); 2nd sender: senders' information
+    mapping(uint=>string) keywordindex;
+    //unit: keyword's indexed; string keyword;
+    mapping(uint=>string) cipher;
+    //1th string:index; 2nd string:cipher;
+    mapping(uint=>keyword) keywords;
+
+    
+    function newsender(string _hash, string _filepb, string _filepv,string _hyperbolapb, string _hyperbolapv)  public returns(bool){
+        // store sender's information
+        senders[_hash]=sender(_filepb,_filepv,_hyperbolapb,_hyperbolapv);
+        return true;
+    }
+    
+    function newreceiver(string _username, string _hyperbolapb, string _filepb) public returns(bool){
+        //store receivers' public keyword
+        receivers[_username]=receiver(_hyperbolapb, _filepb);
+        return true;
+    }
+    
+    function newfile(string _keyworda, string _keywordb, string _cipher) public returns(bool){
+        //store keyword and cipher
+        cipher[filenum]=_cipher;
+        keywords[filenum]=keyword(_keyworda,_keywordb);
+        filenum++;
+        return true;
+    }
+    
+
+    
+    function fetchhyperpb(string _username) view public returns(string){
+        //return the hyperbola public key of the receiver
+        receiver storage Bob=receivers[_username];
+        return Bob.hyperbolapb;
+    }
+    
+    function fetchhyperpv(string _hash) view public returns(string){
+        // return the hyperbola private key of the sender;
+        sender storage Alice = senders[_hash];
+        return Alice.hyperbolapv;
+    }
+    
+    function fetchcipher(uint i) view public returns (string){
+        return cipher[i];
+    }
+    
+    function fetchkeyword(uint i) view public returns (string,string){
+        keyword storage x= keywords[i];
+        return (x.A,x.B);
+    }
+    
+    function fetchfilenum() view public returns(uint){
+        return filenum;
+    }
+    
+    function fetchmsgpv(string _hash) view public returns(string){
+        sender storage Lucy = senders[_hash];
+        return Lucy.filepv;
+    }
+    
+    function fetchmsgpb(string _username) view public returns(string){
+        receiver storage Frank=receivers[_username];
+        return Frank.filepb;
+    }
+}
