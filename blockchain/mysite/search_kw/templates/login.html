@@ -1,0 +1,52 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet"/>
+    <title>登录</title>
+  </head>
+  <body>
+    <div class="container">
+            <div class="col">
+                <form class="form-login" action="/login/" method="post">
+                  {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                  {% endif %}
+                    <!--使用POST的方法时，必须添加{% csrf_token %}标签，用于处理csrf安全机制-->
+                  {% csrf_token %}
+                  <h3 class="text-center">欢迎登录</h3>
+                    <!--login_form这个名称来自在视图函数中生成的form实例的变量名-->
+                  <!--{{ login_form }}-->
+                    <!--手动渲染所有元素-->
+                  <div class="form-group">
+                    {{ login_form.username.label_tag }}
+                    {{ login_form.username}}
+                  </div>
+                  <div class="form-group">
+                    {{ login_form.password.label_tag }}
+                    {{ login_form.password }}
+                  </div>
+
+                  <div>
+                      <a href="/register/" class="text-success " ><ins>新用户注册</ins></a>
+                      <button type="submit" class="btn btn-primary float-right">登录</button>
+                  </div>
+                </form>
+            </div>
+    </div> <!-- /container -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {#    以下三者的引用顺序是固定的#}
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

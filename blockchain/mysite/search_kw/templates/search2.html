@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>关键字搜索</title>
+    <link rel="stylesheet" href="{% static 'css/peks_search.css' %}">
+</head>
+
+<body>
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <div class="funcbok">
+        <div style="height: 20px; margin-left: 10px;">
+            <div id="usr-info" style="z-index: 999; float: left; margin-top: -10px;">
+                 <img src="{% static 'imgs/user.png' %}" style="z-index: 1000; width: 43px; margin-top: -12px; margin-right: 18px;" onclick="location.href='/sendRcv2/'">
+                <img src="{% static 'imgs/search.png' %}" style="z-index: 1000; width: 42px; margin-top: -13px; margin-right: 18px;" onclick="location.href='/search2/'">
+                <img src="{% static 'imgs/recv.png' %}" style="background-color: white; z-index: 1000; width: 42px; margin-top: -13px; margin-right: 18px;" onclick="location.href='/sendRcv2/'">
+                <img src="{% static 'imgs/out.png' %}" style="z-index: 1000; width: 42px; margin-top: -13px;" onclick="location.href='/index2/'">
+            </div>
+        </div>
+        <div class="fcontainer">
+            <div class="fright">
+                <div class="form2">
+                    <div class="left">
+                        <div class="enc">
+                            <div class="result">result</div>
+                            {% for dt in data %}
+                            <div class="textarea" rows=3 cols=20>{{ dt }}</div>
+                            {% endfor %}
+                        </div>
+                        <hr>
+                        <div class="dec">
+                             <div class="dresult">decode</div>
+                            {% for dt_de in data_de %}
+                            <div class="textarea">{{ dt_de }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <form class="form3" action="/search2/" method="post">
+                    {% csrf_token %}
+                      <div id="ky">
+                        <label for="keyword" style="text-shadow: 2px 2px 3px grey;font-size: 20px; text-align: center;">Keyword</label>
+                        <input type="text" name="keyword" class="kycls" id="keyword" style="padding-left: 23px; color: white; max-width: 199px;" placeholder="input your keyword">
+                      </div>
+                      <div id="btm">
+                        <input type="image" src="{% static 'imgs/find.png' %}" style="box-shadow: -3px -3px 3px #666878; z-index: 1000; width: 50px; margin-top: 0px; margin-right: 18px; margin-left: 20px; float: left;">
+                      </div>
+                      <div id="btm2">
+                        <input type="image" src="{% static 'imgs/de.png' %}" style="box-shadow: -3px -3px 3px #666878; z-index: 1000; width: 50px; margin-top: 0px; margin-right: 20px; margin-right: 18px; float: right;">
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/anime_min.js' %}"></script>
+    <script src="{% static 'js/peks_search.js' %}"></script>
+    <script charset="utf-8" src="{% static 'editor/kindeditor-all.js' %}"></script>
+    <script charset="utf-8" src="{% static 'editor/lang/zh-CN.js' %}"></script>
+</body>
+
+<body>
+    <div id="footer">Copyright © 2020 等待命名（team&system). All rights reserved.</div>
+</body>
+
+</html>

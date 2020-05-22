@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>发送信息</title>
+    <link rel="stylesheet" href="{% static 'css/peks_sendrcv.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/zzsc.css' %}">
+    <link rel="stylesheet" href="{% static 'css/calpicker.css' %}"/>
+</head>
+
+<body>
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <div class="funcbok">
+        <div style="height: 20px; margin-left: 10px;">
+            <div id="usr-info" style="z-index: 999; float: left; margin-top: -10px;">
+                <img src="{% static 'imgs/user.png' %}" style="z-index: 1000; width: 43px; margin-top: -12px; margin-right: 18px;" onclick="location.href='/sendRcv2/'">
+                <img src="{% static 'imgs/search.png' %}" style="z-index: 1000; width: 42px; margin-top: -13px; margin-right: 18px;" onclick="location.href='/search2/'">
+                <img src="{% static 'imgs/recv.png' %}" style="background-color: white; z-index: 1000; width: 42px; margin-top: -13px; margin-right: 18px;" onclick="location.href='/sendRcv2/'">
+                <img src="{% static 'imgs/out.png' %}" style="z-index: 1000; width: 42px; margin-top: -13px;" onclick="location.href='/index2/'">
+            </div>
+        </div>
+        <div class="fcontainer">
+            <div class="fright">
+                <form class="form2" action="/sendRcv2/" method="post">
+                    {% csrf_token %}
+                    <div class="a1">
+                        <label class="form-inline" id="rcv_m" style="text-shadow: 2px 2px 3px #666878; float: left">Receiver:</label>
+                        <img src="{% static 'imgs/rcvr.png'%}" style="box-shadow: 2px 2px 3px #666878;z-index: 1000; width: 30px; margin-left: -38px; margin-top: -1px;">
+                        <input style="color: black" type="text" class="form-control" id="id_receiver" name="reserver" placeholder=" Please type receiver's name">
+                    </div>
+                    <hr>
+                     <div class="a2">
+                        <label class="form-inline" id="kw_m" name="keyword" style="text-shadow: 2px 2px 3px #666878; float: left">Keyword:</label>
+                        <img src="{% static 'imgs/keyword.png'%}" style="box-shadow: 2px 2px 3px #666878;z-index: 1000; width: 30px; margin-left: -39px; margin-top: -1px;">
+                        <input style="color: black;margin-top: 1.6%" type="text" class="form-control" id="id_keyword" name="keyword" placeholder=" Please input the keyword">
+                    </div>  
+                    <hr>          
+                    <div class="kd">
+                        <div class="b">
+                            <input type="image" src="{% static 'imgs/send.png'%}" style="box-shadow: -2px -2px 3px #666878; float:right; width:40px; margin-right: -12px;"/>
+                            <!--  <img type="submit" src="{% static 'imgs/send.png'%}" style="box-shadow: -2px -2px 3px #666878; float:right; width:40px; margin-right: -12px;">  -->
+                        </div>
+                        <textarea id="textarea_kd"  name="text"></textarea>
+                        
+                    </div>        
+                </form>
+                <div class="form3">
+                    <div class="col-md-6" style="width: 100%;">
+                        <h3 style="text-shadow: 2px 2px 3px #666878;margin-bottom: 50px;">calendar</h3>
+                        <table id='mycalendar' class='calendar'></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/anime_min.js' %}"></script>
+    <script src="{% static 'js/peks_sendrcv.js' %}"></script>
+    <script charset="utf-8" src="{% static 'editor/kindeditor-all.js' %}"></script>
+    <script charset="utf-8" src="{% static 'editor/lang/zh-CN.js' %}"></script>
+    <script>
+            KindEditor.ready(function(K) {
+                    window.editor = K.create('#textarea_kd');
+            });
+    </script>  
+    <script src="{% static 'js/jquerymin.js' %}" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'js/calpicker.js' %}"></script>
+    <script type="text/javascript">
+        $('#mydatepicker').dcalendarpicker(); 
+        $('#mydatepicker2').dcalendarpicker({
+            format:'yyyy-mm-dd'
+        }); 
+        $('#mycalendar').dcalendar();
+    </script>  
+</body>
+
+<body>
+	<div id="footer">Copyright © 2020 等待命名（team&system). All rights reserved.</div>
+</body>
+
+</html>

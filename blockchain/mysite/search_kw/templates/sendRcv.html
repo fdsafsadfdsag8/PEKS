@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>等待命名</title>
+    <link rel="stylesheet" href="{% static 'css/peks_index.css' %}">
+</head>
+
+<body>
+    <div class="funcbok">
+       <div class="fcontainer">
+            <div class="fright">
+                <div>
+                    <svg>
+                        <defs>
+                            <linearGradient inkscape:collect="always" id="linearGradient" x1="13" y1="193.49992" x2="307"
+                                y2="193.49992" gradientUnits="userSpaceOnUse">
+                                <stop style="stop-color:#ff00ff;" offset="0" id="stop876" />
+                                <stop style="stop-color:#ff0000;" offset="1" id="stop878" />
+                            </linearGradient>
+                        </defs>
+                        <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
+                </svg>
+                </div>
+                <form class="fform" action="/sendRcv/" method="post">
+                    {% if message %}
+                      <div class="alert alert-warning">{{ message }}</div>
+                    {% endif %}
+                    {% csrf_token %}
+                    <label for="id_get">Reserver</label>
+                    <input type="text" id="id_get" name="reserver">
+                    <label for="id_kw">Keyword</label>
+                    <input type="text" id="id_kw" name="keyword">
+                    <label for="textarea">Content</label>
+                    <textarea id="textarea" rows="10" cols="30" name="text">发送成功暂时没有验证机制，只是弹出一个弹窗， 需要服务器对接</textarea>
+                    <div>
+                        <div class="leftbtn">
+                            <input type="submit" id="send" value="send" >
+                        </div>
+                        <div class="rightbtn">
+                            <input type="button" id="search" value="search" onclick="location.href='/search/'">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/anime_min.js' %}"></script>
+    <script src="{% static 'js/peks_index.js' %}"></script>
+</body>
+
+<body>
+	<div id="footer">Copyright © 2020 等待命名（team&system). All rights reserved.</div>
+</body>
+
+</html>
