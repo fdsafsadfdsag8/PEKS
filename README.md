@@ -73,3 +73,7 @@
 - 在注册之后必须进行挖矿
 - 在发送信息之后也必须进行挖矿
 
+## 5其它问题
+
+- 关于python虚拟路径失效的问题：[PyCharm中如何导入别人的项目](https://blog.csdn.net/baidu_27922823/article/details/88233528?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)
+
